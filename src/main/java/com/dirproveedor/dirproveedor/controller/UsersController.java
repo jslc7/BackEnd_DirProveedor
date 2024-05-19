@@ -10,25 +10,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dirproveedor.dirproveedor.entity.Categorias;
-import com.dirproveedor.dirproveedor.services.CategoriasService;
+import com.dirproveedor.dirproveedor.entity.Users;
+import com.dirproveedor.dirproveedor.services.UsersService;
 
 @Controller
-@RequestMapping("/api/v1/categorias")
+@RequestMapping("/api/v1/users")
 @CrossOrigin(originPatterns = "*")
-public class CategoriasController {
+public class UsersController {
 	@Autowired
-	private CategoriasService categoriasService;
+	private UsersService usersService;
 
 	@GetMapping
-	public ResponseEntity<?> findAll() {
-
-		return ResponseEntity.status(200).body(categoriasService.findAll());
+	private ResponseEntity<?> findAll() {
+		return ResponseEntity.status(HttpStatus.OK).body(usersService.findAll());
 	}
 
 	@PostMapping
-	public ResponseEntity<Categorias> create(@RequestBody Categorias categorias) {
-		System.out.println(categorias.getNombre());
-		return ResponseEntity.status(HttpStatus.CREATED).body(categoriasService.save(categorias));
+	private ResponseEntity<Users> save(@RequestBody Users users) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(usersService.save(users));
 	}
 }
